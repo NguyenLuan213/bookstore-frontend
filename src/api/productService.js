@@ -1,5 +1,10 @@
 import axios from "axios";
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/products";
+
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+if (!API_BASE_URL) {
+  throw new Error("Missing VITE_API_URL in environment");
+}
+const API_URL = `${API_BASE_URL}/products`;
 
 // Public functions
 export const getProducts = (pageNumber = '', featured = false, bestseller = false) => {

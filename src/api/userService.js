@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/users';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+if (!API_BASE_URL) {
+  throw new Error('Missing VITE_API_URL in environment');
+}
+const API_URL = `${API_BASE_URL}/users`;
 
 export const register = async (userData) => {
   const response = await axios.post(`${API_URL}/register`, userData);
